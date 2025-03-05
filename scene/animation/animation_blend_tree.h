@@ -36,8 +36,6 @@
 class AnimationNodeAnimation : public AnimationRootNode {
 	GDCLASS(AnimationNodeAnimation, AnimationRootNode);
 
-	StringName backward = "backward"; // Only used by pingpong animation.
-
 	StringName animation;
 
 	bool advance_on_start = false;
@@ -58,7 +56,6 @@ public:
 	};
 
 	void get_parameter_list(List<PropertyInfo> *r_list) const override;
-	virtual Variant get_parameter_default_value(const StringName &p_parameter) const override;
 
 	virtual NodeTimeInfo get_node_time_info() const override; // Wrapper of get_parameter().
 
@@ -103,6 +100,7 @@ protected:
 
 private:
 	PlayMode play_mode = PLAY_MODE_FORWARD;
+	bool backward = false; // Only used by pingpong animation.
 };
 
 VARIANT_ENUM_CAST(AnimationNodeAnimation::PlayMode)
